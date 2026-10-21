@@ -74,7 +74,7 @@ def test_get_candidate_filing_without_persistence_returns_actionable_503(monkeyp
 
     assert response.status_code == 503
     detail = response.json()["detail"]
-    assert detail["message"] == "CivicElections workpaper persistence is not configured."
+    assert detail["message"] == "Townlight Elections workpaper persistence is not configured."
     assert "Set CIVICELECTIONS_WORKPAPER_DB_URL" in detail["fix"]
 
 

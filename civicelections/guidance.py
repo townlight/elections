@@ -29,5 +29,5 @@ def answer_voter_question(question: str, sources: list[ElectionSource]) -> Guida
         citations,
         ("Use official election-office source text.", "Confirm dates, places, and eligibility with the clerk."),
         True,
-        "CivicElections provides cited guidance only; it is not a voter registration system.",
+        "Townlight Elections provides cited guidance only; it is not a voter registration system.",
     )

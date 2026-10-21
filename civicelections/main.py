@@ -1,4 +1,4 @@
-"""FastAPI runtime foundation for CivicElections."""
+"""FastAPI runtime foundation for Townlight Elections."""
 import os
 
 from civiccore import __version__ as CIVICCORE_VERSION
@@ -21,7 +21,7 @@ from civicelections.persistence import (
 from civicelections.public_ui import render_public_lookup_page
 from civicelections.training import answer_worker_training_question
 
-app = FastAPI(title="CivicElections", version=__version__, description="Election administration support foundation for CivicSuite.")
+app = FastAPI(title='Townlight Elections', version=__version__, description='Election administration support foundation for Townlight.')
 
 _workpaper_repository: ElectionWorkpaperRepository | None = None
 _workpaper_db_url: str | None = None
@@ -51,7 +51,7 @@ class AccessibilityRequest(BaseModel):
 
 @app.get("/")
 def root() -> dict[str, str]:
-    return {"name":"CivicElections","version":__version__,"status":"election administration foundation plus workpaper persistence","message":"CivicElections guidance, candidate filing checklists, worker training Q&A, ballot-summary drafts, campaign-finance summaries, canvass checklists, optional database-backed candidate/canvass workpapers, accessibility review, and public UI foundation are online; voter registration, ballot marking, tabulation, election conduct automation, official certification, live LLM calls, and election-system connector runtime are not implemented yet.","next_step":"Post-v0.1.1 roadmap: official source imports, clerk review queues, and CivicAccess handoffs"}
+    return {"name":"CivicElections","version":__version__,"status":"election administration foundation plus workpaper persistence","message":"Townlight Elections guidance, candidate filing checklists, worker training Q&A, ballot-summary drafts, campaign-finance summaries, canvass checklists, optional database-backed candidate/canvass workpapers, accessibility review, and public UI foundation are online; voter registration, ballot marking, tabulation, election conduct automation, official certification, live LLM calls, and election-system connector runtime are not implemented yet.","next_step":"Post-v0.1.1 roadmap: official source imports, clerk review queues, and Townlight Access handoffs"}
 
 @app.get("/health")
 def health() -> dict[str, str]:
@@ -80,7 +80,7 @@ def candidate_filing(request: CandidateRequest) -> dict[str, object]:
 @app.get("/api/v1/civicelections/candidate-filing/{filing_id}")
 def get_candidate_filing(filing_id: str) -> dict[str, object]:
     if _workpaper_database_url() is None:
-        raise HTTPException(status_code=503, detail={"message":"CivicElections workpaper persistence is not configured.","fix":"Set CIVICELECTIONS_WORKPAPER_DB_URL to retrieve persisted candidate filing checklists."})
+        raise HTTPException(status_code=503, detail={"message":"Townlight Elections workpaper persistence is not configured.","fix":"Set CIVICELECTIONS_WORKPAPER_DB_URL to retrieve persisted candidate filing checklists."})
     stored = _get_workpaper_repository().get_candidate_filing(filing_id)
     if stored is None:
         raise HTTPException(status_code=404, detail={"message":"Candidate filing checklist record not found.","fix":"Use a filing_id returned by POST /api/v1/civicelections/candidate-filing."})
@@ -113,7 +113,7 @@ def canvass(request: CanvassRequest) -> dict[str, object]:
 @app.get("/api/v1/civicelections/canvass-checklist/{canvass_id}")
 def get_canvass(canvass_id: str) -> dict[str, object]:
     if _workpaper_database_url() is None:
-        raise HTTPException(status_code=503, detail={"message":"CivicElections workpaper persistence is not configured.","fix":"Set CIVICELECTIONS_WORKPAPER_DB_URL to retrieve persisted canvass checklists."})
+        raise HTTPException(status_code=503, detail={"message":"Townlight Elections workpaper persistence is not configured.","fix":"Set CIVICELECTIONS_WORKPAPER_DB_URL to retrieve persisted canvass checklists."})
     stored = _get_workpaper_repository().get_canvass_checklist(canvass_id)
     if stored is None:
         raise HTTPException(status_code=404, detail={"message":"Canvass checklist record not found.","fix":"Use a canvass_id returned by POST /api/v1/civicelections/canvass-checklist."})
